@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Stack, TextField, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { usePomodoro } from "../hooks";
 import { PauseOutlined, PlayArrowOutlined } from "@mui/icons-material";
 import { DateTimeUtils } from "../utils";
@@ -46,7 +46,6 @@ export function PomodoroScreen(): React.ReactElement {
         <IconButton disabled={!running} onClick={onPauseButtonClicked}>
           <PauseOutlined />
         </IconButton>
-        <TextField type="number" variant="outlined" />
       </Stack>
     </Stack>
   );
