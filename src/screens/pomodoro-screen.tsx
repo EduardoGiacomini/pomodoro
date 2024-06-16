@@ -1,11 +1,16 @@
 import React from "react";
 import { IconButton, Stack, Typography } from "@mui/material";
+import {
+  PauseOutlined,
+  PlayArrowOutlined,
+  StopOutlined,
+} from "@mui/icons-material";
 import { usePomodoro } from "../hooks";
-import { PauseOutlined, PlayArrowOutlined } from "@mui/icons-material";
 import { DateTimeUtils } from "../utils";
+import { PomodoroSetupScreen } from "./pomodoro-setup-screen";
 
 export function PomodoroScreen(): React.ReactElement {
-  const { seconds, running, start, pause, resume } = usePomodoro();
+  const { seconds, running, start, stop, pause, resume } = usePomodoro();
 
   const onPlayButtonClicked = (): void => {
     if (seconds <= 0) {
@@ -18,6 +23,11 @@ export function PomodoroScreen(): React.ReactElement {
 
   const onPauseButtonClicked = (): void => {
     pause();
+  };
+
+  const onStopButtonClicked = (): void => {
+    const thirtyMinutesInSeconds = 30 * 60;
+    stop(thirtyMinutesInSeconds);
   };
 
   return (
@@ -46,6 +56,10 @@ export function PomodoroScreen(): React.ReactElement {
         <IconButton disabled={!running} onClick={onPauseButtonClicked}>
           <PauseOutlined />
         </IconButton>
+        <IconButton onClick={onStopButtonClicked}>
+          <StopOutlined />
+        </IconButton>
+        <PomodoroSetupScreen disabled={running} />
       </Stack>
     </Stack>
   );

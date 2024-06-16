@@ -4,9 +4,6 @@ export const decrementPomodoro = (): PomodoroDecrementAction => ({
   type: "decrement",
 });
 
-/**
- * Decrements one second from pomodoro timer.
- */
 export const pomodoroDecrementAction = (
   state: PomodoroState,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

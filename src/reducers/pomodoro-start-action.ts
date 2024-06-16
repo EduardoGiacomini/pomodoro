@@ -9,9 +9,6 @@ export const startPomodoro = (seconds: number): PomodoroStartAction => ({
   seconds,
 });
 
-/**
- * Start new pomodoro counter based on docs/pomodoro/start-pomodoro.feature.
- */
 export const pomodoroStartAction = (
   state: PomodoroState,
   action: PomodoroStartAction

@@ -4,9 +4,6 @@ export const resumePomodoro = (): PomodoroResumeAction => ({
   type: "resume",
 });
 
-/**
- * Resume the current pomodoro counter based on docs/pomodoro/resume-pomodoro.feature.
- */
 export const pomodoroResumeAction = (
   state: PomodoroState,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
