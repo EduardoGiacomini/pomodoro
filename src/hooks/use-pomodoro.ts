@@ -13,15 +13,17 @@ import {
   resumePomodoro,
   stopPomodoro,
 } from "../reducers";
+import { setupPomodoro } from "../reducers/pomodoro-setup-action";
 
 interface PomodoroContract {
   seconds: number;
   running: boolean;
   error?: PomodoroError | undefined;
   start: (seconds: number) => void;
-  stop: (seconds: number) => void;
   pause: () => void;
   resume: () => void;
+  stop: (seconds: number) => void;
+  setup: (seconds: number) => void;
 }
 
 /**
@@ -62,14 +64,6 @@ export function usePomodoro(): PomodoroContract {
     [playPomodoroStartSound]
   );
 
-  const stop = React.useCallback(
-    (timerSeconds: number) => {
-      dispatch(stopPomodoro(timerSeconds));
-      playPomodoroPauseSound();
-    },
-    [playPomodoroPauseSound]
-  );
-
   const pause = React.useCallback(() => {
     dispatch(pausePomodoro());
     playPomodoroPauseSound();
@@ -80,5 +74,17 @@ export function usePomodoro(): PomodoroContract {
     playPomodoroStartSound();
   }, [playPomodoroStartSound]);
 
-  return { seconds, running, error, start, pause, resume, stop };
+  const stop = React.useCallback(
+    (timerSeconds: number) => {
+      dispatch(stopPomodoro(timerSeconds));
+      playPomodoroPauseSound();
+    },
+    [playPomodoroPauseSound]
+  );
+
+  const setup = React.useCallback((timerSeconds: number) => {
+    dispatch(setupPomodoro(timerSeconds));
+  }, []);
+
+  return { seconds, running, error, start, pause, resume, stop, setup };
 }

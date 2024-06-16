@@ -1,5 +1,5 @@
 export { startPomodoro } from "./pomodoro-start-action";
-export { stopPomodoro } from "./pomoforo-stop-action";
+export { stopPomodoro } from "./pomodoro-stop-action";
 export { pausePomodoro } from "./pomodoro-pause-action";
 export { resumePomodoro } from "./pomodoro-resume-action";
 export { decrementPomodoro } from "./pomodoto-decrement-action";

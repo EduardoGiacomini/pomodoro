@@ -8,14 +8,17 @@ import {
 import { usePomodoro } from "../hooks";
 import { DateTimeUtils } from "../utils";
 import { PomodoroSetupScreen } from "./pomodoro-setup-screen";
+import { DEFAULT_POMODORO_SECONDS } from "./pomodoro-constants";
 
 export function PomodoroScreen(): React.ReactElement {
-  const { seconds, running, start, stop, pause, resume } = usePomodoro();
+  const { seconds, running, start, stop, pause, setup, resume } = usePomodoro();
+  const [pomodoroSeconds, setPomodoroSeconds] = React.useState(
+    DEFAULT_POMODORO_SECONDS
+  );
 
   const onPlayButtonClicked = (): void => {
     if (seconds <= 0) {
-      const thirtyMinutesInSeconds = 30 * 60;
-      start(thirtyMinutesInSeconds);
+      start(pomodoroSeconds);
     } else {
       resume();
     }
@@ -26,8 +29,12 @@ export function PomodoroScreen(): React.ReactElement {
   };
 
   const onStopButtonClicked = (): void => {
-    const thirtyMinutesInSeconds = 30 * 60;
-    stop(thirtyMinutesInSeconds);
+    stop(pomodoroSeconds);
+  };
+
+  const onSetupPomodoro = (seconds: number): void => {
+    setup(seconds);
+    setPomodoroSeconds(seconds);
   };
 
   return (
@@ -59,7 +66,11 @@ export function PomodoroScreen(): React.ReactElement {
         <IconButton onClick={onStopButtonClicked}>
           <StopOutlined />
         </IconButton>
-        <PomodoroSetupScreen disabled={running} />
+        <PomodoroSetupScreen
+          disabled={running}
+          defaultSeconds={pomodoroSeconds}
+          onSetupPomodoro={onSetupPomodoro}
+        />
       </Stack>
     </Stack>
   );

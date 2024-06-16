@@ -1,9 +1,15 @@
 export type PomodoroAction =
+  | PomodoroSetupAction
   | PomodoroStartAction
   | PomodoroStopAction
   | PomodoroPauseAction
   | PomodoroResumeAction
   | PomodoroDecrementAction;
+
+export interface PomodoroSetupAction {
+  type: "setup";
+  seconds: number;
+}
 
 export interface PomodoroStartAction {
   type: "start";

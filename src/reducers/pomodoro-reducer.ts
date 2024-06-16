@@ -3,13 +3,16 @@ import { pomodoroStartAction } from "./pomodoro-start-action";
 import { pomodoroResumeAction } from "./pomodoro-resume-action";
 import { pomodoroDecrementAction } from "./pomodoto-decrement-action";
 import { PomodoroAction, PomodoroState } from "./pomodoro-state";
-import { pomodoroStopAction } from "./pomoforo-stop-action";
+import { pomodoroStopAction } from "./pomodoro-stop-action";
+import { pomodoroSetupAction } from "./pomodoro-setup-action";
 
 export function pomodoroReducer(
   state: PomodoroState,
   action: PomodoroAction
 ): PomodoroState {
   switch (action.type) {
+    case "setup":
+      return pomodoroSetupAction(state, action);
     case "start":
       return pomodoroStartAction(state, action);
     case "stop":
